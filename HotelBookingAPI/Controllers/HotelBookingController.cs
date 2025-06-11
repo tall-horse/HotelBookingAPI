@@ -5,7 +5,7 @@ using HotelBookingAPI.Data;
 
 namespace HotelBookingAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class HotelBookingController : ControllerBase
     {
@@ -67,7 +67,7 @@ namespace HotelBookingAPI.Controllers
         }
 
         //GetAll
-        [HttpGet("/GetAll")]
+        [HttpGet()]
         public JsonResult GetAll()
         {
             var result = _context.Bookings.ToList();
