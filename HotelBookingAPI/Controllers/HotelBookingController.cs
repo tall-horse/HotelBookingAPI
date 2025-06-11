@@ -15,5 +15,28 @@ namespace HotelBookingAPI.Controllers
         {
             _context = context;
         }
+
+        //Create/Edit
+        [HttpPost]
+        public JsonResult CreateEdit(HotelBooking booking)
+        {
+            if (booking.Id == 0)
+            {
+                _context.Bookings.Add(booking);
+            }
+            else
+            {
+                var bookingInDb = _context.Bookings.Find(booking.Id);
+
+                if(bookingInDb == null)
+                {
+                    return new JsonResult(NotFound());
+                }
+            }
+
+            _context.SaveChanges();
+
+            return new JsonResult(Ok(booking));
+        }
     }
 }
